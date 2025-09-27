@@ -143,4 +143,182 @@
     window.location.href = "chat.html";
   }
 </script>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الرومات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f2027;  /* خلفية غامقة */
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
 
+    .rooms-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .room-card {
+      background: #1e2a38; /* نفس لون الكروت فالسكرين */
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      text-align: center;
+      transition: 0.3s;
+      color: #fff;
+    }
+
+    .room-card:hover {
+      transform: translateY(-5px);
+      background: #243447; /* يفتح شوية كي تدير hover */
+    }
+
+    .room-card h3 {
+      margin: 10px 0;
+      color: #00d9ff; /* العنوان سماوي */
+    }
+
+    .room-card button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    .room-card button:hover {
+      background: #0056b3;
+    }
+
+    /* زر اللعبة */
+    .game-card {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+    }
+    .game-card h3 {
+      color: white;
+    }
+    .game-card button {
+      background: #ffcc00;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* ستايل النافذة */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #1e2a38;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 300px;
+      animation: fadeIn 0.3s ease-in-out;
+      color: white;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+
+    .modal-content button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .modal-content button:hover {
+      opacity: 0.8;
+    }
+
+    .modal-content button:first-of-type {
+      background: #007bff;
+      color: white;
+    }
+
+    .modal-content button:last-of-type {
+      background: #28a745;
+      color: white;
+    }
+
+    .close {
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="rooms-container">
+
+    
+    <!-- زر خاص باللعبة -->
+    <div class="room-card game-card">
+      <span class="count">🎮</span>
+      <h3>لعبة ║ جرأة أم حقيقة</h3>
+      <button onclick="openGame()">إبدأ اللعب</button>
+    </div>
+
+  </div>
+
+  <!-- نافذة اللعبة -->
+  <div id="game-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeGame()">&times;</span>
+      <h2>🎮 اختر وضع اللعبة</h2>
+      <button onclick="invitePlayer()">👥 لعب مع مستخدم</button>
+      <button onclick="playBot()">🤖 لعب مع روبوت</button>
+    </div>
+  </div>
+
+  <script>
+    function openGame(){
+      document.getElementById("game-modal").style.display = "flex";
+    }
+    function closeGame(){
+      document.getElementById("game-modal").style.display = "none";
+    }
+    function invitePlayer(){
+      const user = prompt("📝 أدخل اسم المستخدم الذي تريد دعوته:");
+      if(user){
+        alert("📩 تم إرسال دعوة إلى " + user);
+      }
+    }
+    function playBot(){
+      window.location.href = "game-bot.html"; // هنا تدير صفحة خاصة بالروبوت
+    }
+  </script>
+</body>
+</html>

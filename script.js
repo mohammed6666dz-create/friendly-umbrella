@@ -23,4 +23,3 @@ if (currentUser === myUsername) {
 } else {
   roleElement.textContent = "عضو";
 }
-

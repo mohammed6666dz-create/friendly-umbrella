@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لعبة مع الروبوت</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+    }
+    .game-box {
+      width: 600px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .messages {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 15px;
+      text-align: right;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .truth { background: #4CAF50; color: white; }
+    .dare { background: #E91E63; color: white; }
+  </style>
+</head>
+<body>
+  <div class="game-box">
+    <h2>لعبة جرأة أم حقيقة 🤖</h2>
+    <div class="messages" id="chat"></div>
+    <button class="btn truth" onclick="ask('truth')">حقيقة</button>
+    <button class="btn dare" onclick="ask('dare')">جرأة</button>
+  </div>
+
+  <script>
+    const chat = document.getElementById("chat");
+
+    // بنك أسئلة (100 حقيقة + 100 جرأة)
+    const truths = [
+      "ما هو أكبر سر تخفيه عن أصدقائك؟",
+      "هل سبق وكذبت على والديك؟",
+      "من هو crush تاعك؟",
+      "هل بكيت آخر مرة من غير سبب قوي؟",
+      "هل غرت من صديقك من قبل؟",
+      "هل سبق وندمت على قرار كبير؟",
+      "ما هو أسوأ يوم في حياتك؟",
+      "هل تحب شخص الآن؟",
+      "لو قدرت تبدل حياتك مع شخص، من تختار؟",
+      "هل سبق وقلت أحبك لشخص وندمت؟",
+      // ... كمّل حتى 100 سؤال حقيقة
+    ];
+
+    const dares = [
+      "غني أغنية بصوت عالي.",
+      "صور نفسك بفلتر غريب وأرسله.",
+      "تكلم 30 ثانية بلهجة غير لهجتك.",
+      "اعمل 10 ضغطات.",
+      "اتصل بصديقك وقله نكتة غبية.",
+      "ابعت إيموجي عشوائي لآخر شخص دردشت معاه.",
+      "اكتب رسالة حب وهمية.",
+      "اعمل حركة مجنونة بالكاميرا.",
+      "غيّر اسمك في واتساب ليوم كامل.",
+      "قول سر محرج عن نفسك.",
+      // ... كمّل حتى 100 سؤال جرأة
+    ];
+
+    function addMessage(sender, text) {
+      const p = document.createElement("p");
+      p.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      chat.appendChild(p);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function ask(type) {
+      if (type === "truth") {
+        const q = truths[Math.floor(Math.random() * truths.length)];
+        addMessage("🤖 الروبوت", q);
+      } else {
+        const q = dares[Math.floor(Math.random() * dares.length)];
+        addMessage("🤖 الروبوت", q);
+      }
+
+      // الدور يتبدل: الروبوت يسقسي اللاعب
+      setTimeout(() => {
+        const botChoice = Math.random() > 0.5 ? "حقيقة" : "جرأة";
+        addMessage("🤖 الروبوت", `سؤالي لك: اخترت ${botChoice}`);
+        if (botChoice === "حقيقة") {
+          const q = truths[Math.floor(Math.random() * truths.length)];
+          addMessage("❓", q);
+        } else {
+          const q = dares[Math.floor(Math.random() * dares.length)];
+          addMessage("❓", q);
+        }
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
