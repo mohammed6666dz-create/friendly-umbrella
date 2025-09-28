@@ -1,36 +1,64 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
+const cors = require("cors");
 const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // يسمح لأي رابط يتصل بالسيرفر
+    methods: ["GET", "POST"]
+  }
+});
 
-// نخلي مجلد public يتشاف
+app.use(cors());
+
+// كل الملفات الأمامية في public/
 app.use(express.static(path.join(__dirname, "public")));
 
-// route رئيسي
+// إرسال index.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// WebSocket
-io.on("connection", (socket) => {
-  console.log("🔌 واحد دخل");
+// غرف ورسائل
+let rooms = {}; // لتخزين الرسائل مؤقتاً لكل غرفة
 
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
+io.on("connection", (socket) => {
+  console.log("✅ مستخدم دخل");
+
+  // دخول غرفة
+  socket.on("joinRoom", ({ room, username, avatar }) => {
+    socket.join(room);
+    if (!rooms[room]) rooms[room] = [];
+    
+    // إرسال الرسائل القديمة للمستخدم الجديد
+    socket.emit("messageHistory", rooms[room]);
+
+    // إعلام الجميع بالانضمام
+    const joinMsg = {
+      user: "النظام",
+      text: `${username} انضم إلى الغرفة`,
+      time: new Date().toLocaleTimeString()
+    };
+    io.to(room).emit("message", joinMsg);
+  });
+
+  // استقبال رسالة
+  socket.on("chatMessage", ({ room, user, avatar, msg, time }) => {
+    const message = { user, avatar, text: msg, time };
+    if (!rooms[room]) rooms[room] = [];
+    rooms[room].push(message);
+
+    io.to(room).emit("message", message); // إرسال لكل المستخدمين في الغرفة
   });
 
   socket.on("disconnect", () => {
-    console.log("❌ واحد خرج");
+    console.log("❌ مستخدم خرج");
   });
 });
 
-// PORT يجي من Render ولا من 3000 محلي
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`🚀 السيرفر خدام على http://localhost:${PORT}`);
-});
-
+server.listen(PORT, () => console.log(`🚀 السيرفر شغال على PORT ${PORT}`));
