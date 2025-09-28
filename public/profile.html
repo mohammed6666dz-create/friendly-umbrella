@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>البروفايل</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="profile-container">
+ <!-- الغلاف (Cover) -->
+<div class="profile-cover" id="profileCover">
+  <img src="default-cover.jpg" id="coverImage" alt="cover">
+  <div class="change-cover">
+    <label for="coverInput">📷 تغيير الخلفية</label>
+    <input type="file" id="coverInput" accept="image/*" style="display:none;">
+  </div>
+</div>
+
+    <!-- صورة البروفايل -->
+    <div class="avatar-section">
+      <img id="avatar" src="https://i.imgur.com/5cX1.png" alt="avatar">
+      <input type="file" id="avatar-input" accept="image/*" style="display:none">
+      <button onclick="changeAvatar()">📷</button>
+    </div>
+
+    <!-- الاسم والحالة -->
+    <h1 id="username">مجهول</h1>
+    <p id="status">ضع حالتك هنا</p>
+
+    <!-- قائمة الخيارات -->
+    <div class="settings">
+      <div onclick="editInfo()">📑 تحرير البيانات</div>
+      <div onclick="changeUsername()">✏️ تغيير اسم المستخدم</div>
+      <div onclick="changeColor()">🎨 تغيير لون الاسم</div>
+      <div onclick="changeStatus()">📝 تغيير الحالة</div>
+      <div>🔊 إعدادات الصوت</div>
+      <div>⚙️ إعدادات خاصة</div>
+      <div>📧 تعديل البريد الإلكتروني</div>
+      <div>🌍 اللغة / الموقع</div>
+      <div>🔄 تغيير السيرفر</div>
+      <div class="danger">🗑️ حذف العضوية</div>
+    </div>
+
+    <!-- رجوع للرومات -->
+    <button class="back" onclick="goBack()">⬅️ عودة للرومات</button>
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>بروفايلي — ARABI chat</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+  
+

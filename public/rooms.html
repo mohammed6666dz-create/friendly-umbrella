@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الرومات</title>
+  <link rel="stylesheet" href="rooms.css">
+  <style>
+    /* ستايل المودال */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      color: #fff;
+      text-align: right;
+    }
+    .modal-content input {
+      width: 100%;
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    .modal-content button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .close {
+      float: left;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .user-icon { cursor:pointer; }
+  </style>
+</head>
+<body>
+  <!-- الشريط العلوي -->
+  <header class="topbar">
+    <div class="logo">💬 ARABI chat</div>
+    <!-- أيقونة البروفايل -->
+    <div class="user-icon" onclick="openProfile()">👤</div>
+  </header>
+
+  <!-- قائمة الرومات -->
+  <div class="rooms-container">
+
+    <div class="room-card"><span class="count">👥 754</span><h3>غرفة║الجزائر 🇩🇿</h3><button onclick="enterRoom('غرفة║الجزائر 🇩🇿')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 6339</span><h3>غرفة║العامة 🌍</h3><button onclick="enterRoom('غرفة║العامة 🌍')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 3324</span><h3>غرفة║مصر 🇪🇬</h3><button onclick="enterRoom('غرفة║مصر 🇪🇬')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 1316</span><h3>غرفة║المغرب 🇲🇦</h3><button onclick="enterRoom('غرفة║المغرب 🇲🇦')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 1127</span><h3>غرفة║سوريا 🇸🇾</h3><button onclick="enterRoom('غرفة║سوريا 🇸🇾')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 1121</span><h3>فرفـشـ💃🏻ـة</h3><button onclick="enterRoom('فرفـشـ💃🏻ـة')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 1098</span><h3>غرفة║الامارات 🇦🇪</h3><button onclick="enterRoom('غرفة║الامارات 🇦🇪')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 963</span><h3>غرفة║السعوديه 🇸🇦</h3><button onclick="enterRoom('غرفة║السعوديه 🇸🇦')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 850</span><h3>غرفة║اليمن 🇾🇪</h3><button onclick="enterRoom('غرفة║اليمن 🇾🇪')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 715</span><h3>غرفة║العراق 🇮🇶</h3><button onclick="enterRoom('غرفة║العراق 🇮🇶')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 688</span><h3>الشعر والأدب</h3><button onclick="enterRoom('الشعر والأدب')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 562</span><h3>عـطر🌼الصداقـة😍</h3><button onclick="enterRoom('عـطر🌼الصداقـة😍')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 425</span><h3>غرفة║إسلاميات ☪️</h3><button onclick="enterRoom('غرفة║إسلاميات ☪️')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 336</span><h3>عــهد ✨ الاصدقاء</h3><button onclick="enterRoom('عــهد ✨ الاصدقاء')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 294</span><h3>غرفة║الاردن 🇯🇴</h3><button onclick="enterRoom('غرفة║الاردن 🇯🇴')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 270</span><h3>غرفه║تونس 🇹🇳</h3><button onclick="enterRoom('غرفه║تونس 🇹🇳')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 219</span><h3>║ ࢪوم اَلفخامـة 🖤</h3><button onclick="enterRoom('║ ࢪوم اَلفخامـة 🖤')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 219</span><h3>غرفة║فلسطين 🇵🇸</h3><button onclick="enterRoom('غرفة║فلسطين 🇵🇸')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 191</span><h3>غرفة║ليبيا 🇱🇾</h3><button onclick="enterRoom('غرفة║ليبيا 🇱🇾')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 181</span><h3>غرفة║عمان 🇴🇲</h3><button onclick="enterRoom('غرفة║عمان 🇴🇲')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 168</span><h3>غرفه║قطر 🇶🇦</h3><button onclick="enterRoom('غرفه║قطر 🇶🇦')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 149</span><h3>غرفة║الكويت 🇰🇼</h3><button onclick="enterRoom('غرفة║الكويت 🇰🇼')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 127</span><h3>غرفة║السودان 🇸🇩</h3><button onclick="enterRoom('غرفة║السودان 🇸🇩')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 119</span><h3>اغاني🎤 وسهر❤️</h3><button onclick="enterRoom('اغاني🎤 وسهر❤️')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 111</span><h3>Room | English</h3><button onclick="enterRoom('Room | English')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 110</span><h3>غـرفـة║البـحريـن 🇧🇭</h3><button onclick="enterRoom('غـرفـة║البـحريـن 🇧🇭')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 67</span><h3>غرفة║لبنان 🇱🇧</h3><button onclick="enterRoom('غرفة║لبنان 🇱🇧')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 1</span><h3>التصميم 🎨</h3><button onclick="enterRoom('التصميم 🎨')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 0</span><h3>إدارة 🛠️</h3><button onclick="enterRoom('إدارة 🛠️')">دخول الغرفة</button></div>
+    <div class="room-card"><span class="count">👥 0</span><h3>Working Room 💻</h3><button onclick="enterRoom('Working Room 💻')">دخول الغرفة</button></div>
+
+  </div>
+
+  <!-- نافذة تعديل البروفايل -->
+  <div id="profile-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeProfile()">&times;</span>
+      <h2>تعديل البروفايل</h2>
+
+      <label>إسم المستخدم</label>
+      <input type="text" id="profile-username" placeholder="أدخل إسمك">
+
+      <label>صورة البروفايل</label>
+      <input type="text" id="profile-avatar" placeholder="ضع رابط الصورة">
+
+      <button onclick="saveProfile()">💾 حفظ</button>
+    </div>
+  </div>
+
+  <script>
+    // فتح نافذة البروفايل
+    function openProfile(){
+      document.getElementById("profile-modal").style.display = "flex";
+      document.getElementById("profile-username").value = localStorage.getItem("username") || "";
+      document.getElementById("profile-avatar").value = localStorage.getItem("avatar") || "";
+    }
+
+    // غلق نافذة البروفايل
+    function closeProfile(){
+      document.getElementById("profile-modal").style.display = "none";
+    }
+
+    // حفظ التغييرات
+    function saveProfile(){
+      const username = document.getElementById("profile-username").value.trim();
+      const avatar = document.getElementById("profile-avatar").value.trim();
+
+      if(username) localStorage.setItem("username", username);
+      if(avatar) localStorage.setItem("avatar", avatar);
+
+      alert("✅ تم تعديل البروفايل");
+      closeProfile();
+    }
+  // دخول غرفة
+  function enterRoom(roomName){
+    const username = localStorage.getItem("username") || "مجهول";
+    const avatar = localStorage.getItem("avatar") || "https://i.pravatar.cc/50";
+
+    localStorage.setItem("room", roomName);
+    localStorage.setItem("username", username);
+    localStorage.setItem("avatar", avatar);
+
+    // تحويل إلى صفحة الشات
+    window.location.href = "chat.html";
+  }
+</script>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الرومات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f2027;  /* خلفية غامقة */
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    .rooms-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .room-card {
+      background: #1e2a38; /* نفس لون الكروت فالسكرين */
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      text-align: center;
+      transition: 0.3s;
+      color: #fff;
+    }
+
+    .room-card:hover {
+      transform: translateY(-5px);
+      background: #243447; /* يفتح شوية كي تدير hover */
+    }
+
+    .room-card h3 {
+      margin: 10px 0;
+      color: #00d9ff; /* العنوان سماوي */
+    }
+
+    .room-card button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    .room-card button:hover {
+      background: #0056b3;
+    }
+
+    /* زر اللعبة */
+    .game-card {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+    }
+    .game-card h3 {
+      color: white;
+    }
+    .game-card button {
+      background: #ffcc00;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* ستايل النافذة */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #1e2a38;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 300px;
+      animation: fadeIn 0.3s ease-in-out;
+      color: white;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+
+    .modal-content button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .modal-content button:hover {
+      opacity: 0.8;
+    }
+
+    .modal-content button:first-of-type {
+      background: #007bff;
+      color: white;
+    }
+
+    .modal-content button:last-of-type {
+      background: #28a745;
+      color: white;
+    }
+
+    .close {
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="rooms-container">
+
+    
+    <!-- زر خاص باللعبة -->
+    <div class="room-card game-card">
+      <span class="count">🎮</span>
+      <h3>لعبة ║ جرأة أم حقيقة</h3>
+      <button onclick="openGame()">إبدأ اللعب</button>
+    </div>
+
+  </div>
+
+  <!-- نافذة اللعبة -->
+  <div id="game-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeGame()">&times;</span>
+      <h2>🎮 اختر وضع اللعبة</h2>
+      <button onclick="invitePlayer()">👥 لعب مع مستخدم</button>
+      <button onclick="playBot()">🤖 لعب مع روبوت</button>
+    </div>
+  </div>
+
+  <script>
+    function openGame(){
+      document.getElementById("game-modal").style.display = "flex";
+    }
+    function closeGame(){
+      document.getElementById("game-modal").style.display = "none";
+    }
+    function invitePlayer(){
+      const user = prompt("📝 أدخل اسم المستخدم الذي تريد دعوته:");
+      if(user){
+        alert("📩 تم إرسال دعوة إلى " + user);
+      }
+    }
+    function playBot(){
+      window.location.href = "game-bot.html"; // هنا تدير صفحة خاصة بالروبوت
+    }
+  </script>
+</body>
+</html>

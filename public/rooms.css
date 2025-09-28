@@ -1,0 +1,86 @@
+/* خلفية الموقع */
+body {
+  margin: 0;
+  font-family: "Cairo", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  direction: rtl;
+  min-height: 100vh;
+}
+
+/* الشريط العلوي */
+.topbar {
+  background: rgba(0,0,0,0.6);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #0dcaf0;
+  backdrop-filter: blur(8px);
+}
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0dcaf0;
+  letter-spacing: 1px;
+}
+.user-icon {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* حاوية الرومات */
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  padding: 35px;
+}
+
+/* الكارد */
+.room-card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+}
+.room-card:hover {
+  transform: translateY(-7px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+}
+
+/* النصوص */
+.room-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #0dcaf0;
+}
+.count {
+  font-size: 14px;
+  color: #ccc;
+  margin: 10px 0;
+}
+
+/* زر الدخول */
+.room-card button {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #0dcaf0, #007bff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.room-card button:hover {
+  background: linear-gradient(135deg, #00bcd4, #0069d9);
+  transform: scale(1.05);
+}
