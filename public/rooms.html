@@ -322,3 +322,112 @@
   </script>
 </body>
 </html>
+<!-- لوحة إدارة الرومات -->
+<div id="roomsManager" style="margin-bottom:10px;">
+  <!-- زر فتح روم جديد للمدير فقط -->
+  <button id="openRoomBtn" style="display:none; padding:6px 10px; border:none; border-radius:6px; background:#0fbf9a; color:#fff; cursor:pointer;">➕ فتح روم جديد</button>
+  <!-- زر غلق الرومات -->
+  <button id="closeRoomsBtn" style="display:none; padding:6px 10px; border:none; border-radius:6px; background:#ff4d4d; color:#fff; cursor:pointer;">🛑 غلق الرومات</button>
+</div>
+
+<!-- Popup فتح روم -->
+<div id="newRoomPopup" style="display:none; position:absolute; background:#111; color:#fff; padding:15px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.5); top:60px; right:50px; width:250px; z-index:1000;">
+  <h4 style="margin-top:0; margin-bottom:10px;">إنشاء روم جديد</h4>
+  <input id="newRoomName" type="text" placeholder="اسم الروم" style="width:100%; padding:6px; border-radius:6px; border:none; margin-bottom:10px;">
+  <button id="createRoomBtn" style="width:100%; padding:6px; border:none; border-radius:6px; background:#0fbf9a; color:#fff; cursor:pointer;">فتح روم</button>
+  <button onclick="closeNewRoomPopup()" style="width:100%; padding:6px; margin-top:5px; border:none; border-radius:6px; background:#777; color:#fff; cursor:pointer;">إلغاء</button>
+</div>
+
+<!-- Popup غلق الرومات -->
+<div id="closeRoomsPopup" style="display:none; position:absolute; background:#111; color:#fff; padding:15px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.5); top:60px; right:50px; width:250px; z-index:1000;">
+  <h4 style="margin-top:0; margin-bottom:10px;">غلق الرومات</h4>
+  <ul id="openRoomsList" style="list-style:none; padding:0; margin:0;"></ul>
+  <button onclick="closeCloseRoomsPopup()" style="width:100%; padding:6px; margin-top:10px; border:none; border-radius:6px; background:#777; color:#fff; cursor:pointer;">إلغاء</button>
+</div>
+
+<script>
+// إعدادات المستخدم والرتبة
+const username = "MOHAMED"; // المستخدم الحالي
+const userRanks = { [username]: "👑 مدير الموقع" }; // رتبة المدير
+const rooms = ["عام", "الشات العام"]; // رومات افتراضية
+
+function getUserRank(user){
+  return userRanks[user] || "👤 عضو";
+}
+
+// إظهار أزرار المدير فقط
+if(getUserRank(username).includes("مدير")){
+  document.getElementById("openRoomBtn").style.display = "inline-block";
+  document.getElementById("closeRoomsBtn").style.display = "inline-block";
+}
+
+// عناصر DOM
+const openRoomBtn = document.getElementById("openRoomBtn");
+const newRoomPopup = document.getElementById("newRoomPopup");
+const createRoomBtn = document.getElementById("createRoomBtn");
+const closeRoomsBtn = document.getElementById("closeRoomsBtn");
+const closeRoomsPopup = document.getElementById("closeRoomsPopup");
+const openRoomsList = document.getElementById("openRoomsList");
+const newRoomNameInput = document.getElementById("newRoomName");
+
+// فتح Popup روم جديد
+openRoomBtn.addEventListener("click", ()=>{ newRoomPopup.style.display = "block"; });
+
+// إغلاق Popup روم جديد
+function closeNewRoomPopup(){ newRoomPopup.style.display = "none"; newRoomNameInput.value = ""; }
+
+// فتح روم جديد
+createRoomBtn.addEventListener("click", ()=>{
+  const roomName = newRoomNameInput.value.trim();
+  if(roomName && !rooms.includes(roomName)){
+    rooms.push(roomName);
+    addRoomToList(roomName);
+    closeNewRoomPopup();
+  } else {
+    alert("ادخل اسم روم صالح أو غير موجود مسبقاً");
+  }
+});
+
+// إضافة روم لقائمة الرومات (HTML)
+function addRoomToList(roomName){
+  const ul = document.getElementById("roomsUl"); // افترض قائمة الرومات لديك
+  if(!ul) return;
+  const li = document.createElement("li");
+  li.textContent = roomName;
+  li.style.cursor = "pointer";
+  ul.appendChild(li);
+}
+
+// Popup غلق الرومات
+closeRoomsBtn.addEventListener("click", ()=>{
+  // مسح القائمة القديمة
+  openRoomsList.innerHTML = "";
+  rooms.forEach(room=>{
+    if(room === "عام" || room === "الشات العام") return; // لا تغلق الرومات الأساسية
+    const li = document.createElement("li");
+    li.textContent = room;
+    li.style.cursor = "pointer";
+    li.style.marginBottom = "6px";
+    li.style.padding = "4px";
+    li.style.background = "#222";
+    li.style.borderRadius = "4px";
+    li.addEventListener("click", ()=>{
+      if(confirm(`هل تريد إغلاق الروم: ${room}?`)){
+        // إزالة من HTML
+        const ul = document.getElementById("roomsUl");
+        Array.from(ul.children).forEach(liItem=>{
+          if(liItem.textContent === room) ul.removeChild(liItem);
+        });
+        // إزالة من قائمة الرومات
+        const index = rooms.indexOf(room);
+        if(index !== -1) rooms.splice(index,1);
+        li.remove();
+      }
+    });
+    openRoomsList.appendChild(li);
+  });
+  closeRoomsPopup.style.display = "block";
+});
+
+function closeCloseRoomsPopup(){ closeRoomsPopup.style.display = "none"; }
+</script>

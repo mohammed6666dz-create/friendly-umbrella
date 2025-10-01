@@ -1,212 +1,221 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>الشات — ARABI chat</title>
-
-  <style>
-    :root{
-      --bg:#0f1114;
-      --panel:#111418;
-      --mine:#0fbf9a; /* لون رسائلك */
-      --other:#2a2f36; /* لون رسائل الاخرين */
-      --text:#eaf6f3;
-    }
-    body{
-      margin:0;
-      height:100vh;
-      background:#0b1316;
-      color:var(--text);
-      font-family:"Cairo",sans-serif;
-      display:flex;
-      flex-direction:column;
-      direction:rtl;
-    }
-
-    /* هيدر */
-    .header{
-      background:#111418;
-      padding:14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      border-bottom:1px solid #222;
-    }
-    .header h1{
-      margin:0;
-      font-size:18px;
-      color:var(--mine);
-    }
-    .header button{
-      background:#ff4d4d;
-      border:none;
-      padding:6px 12px;
-      border-radius:8px;
-      color:#fff;
-      cursor:pointer;
-      font-weight:600;
-    }
-
-    /* الشات كامل */
-    .chat-wrap{
-      display:flex;
-      flex-direction:column;
-      height:100vh;
-    }
-
-    .messages{
-      flex:1;
-      overflow-y:auto;
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-
-    .msg-row{display:flex;gap:12px;align-items:flex-start;width:100%}
-    .msg-other{justify-content:flex-start;direction:ltr}
-    .msg-mine{justify-content:flex-end;direction:ltr}
-    .avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;cursor:pointer}
-    .bubble{max-width:78%;padding:10px 14px;border-radius:14px;color:var(--text);box-shadow:0 6px 18px rgba(0,0,0,0.4);display:flex;flex-direction:column;gap:4px}
-    .msg-mine .bubble{background:var(--mine);border-bottom-right-radius:4px;text-align:right}
-    .msg-other .bubble{background:var(--other);border-bottom-left-radius:4px;text-align:right}
-    .bubble .who{font-weight:700;font-size:14px}
-    .bubble .text{font-size:16px}
-    .bubble .meta{font-size:12px;opacity:.6}
-
-    .input-area{
-      padding:12px;
-      display:flex;
-      gap:10px;
-      background:#111;
-    }
-    .input-area input{
-      flex:1;
-      padding:10px;
-      border-radius:10px;
-      border:none;
-      background:#222;
-      color:#fff;
-    }
-    .btn-send{
-      padding:10px 16px;
-      border-radius:10px;
-      border:none;
-      background:var(--mine);
-      color:#04221b;
-      font-weight:700;
-      cursor:pointer
-    }
-
-    #userMenu{display:none;position:absolute;background:#111;padding:10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:100}
-    #userMenu div{padding:6px 12px;cursor:pointer}
-    #userMenu div:hover{background:#222}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الشات — ARABI chat</title>
+<style>
+:root{
+  --bg:#0f1114;
+  --panel:#111418;
+  --mine:#1900fd;
+  --other:#2a2f36;
+  --text:#eaf6f3;
+}
+body{
+  margin:0;
+  height:100vh;
+  background:#0b1316;
+  color:var(--text);
+  font-family:"Cairo",sans-serif;
+  display:flex;
+  flex-direction:column;
+  direction:rtl;
+}
+.header{
+  background:#111418;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #222;
+}
+.header h1{margin:0;font-size:18px;color:var(--mine);}
+.header button{
+  background:#ff4d4d;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+}
+.chat-wrap{display:flex;flex-direction:column;height:100vh;}
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.msg-row{display:flex;gap:12px;align-items:flex-start;width:100%}
+.msg-other{justify-content:flex-start;direction:ltr}
+.msg-mine{justify-content:flex-end;direction:ltr}
+.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;cursor:pointer}
+.bubble{max-width:78%;padding:10px 14px;border-radius:14px;color:var(--text);box-shadow:0 6px 18px rgba(0,0,0,0.4);display:flex;flex-direction:column;gap:4px}
+.msg-mine .bubble{background:var(--mine);border-bottom-right-radius:4px;text-align:right}
+.msg-other .bubble{background:var(--other);border-bottom-left-radius:4px;text-align:right}
+.bubble .who{font-weight:700;font-size:14px}
+.bubble .text{font-size:16px}
+.bubble .meta{font-size:12px;opacity:.6}
+.input-area{
+  padding:12px;
+  display:flex;
+  gap:10px;
+  background:#111;
+}
+.input-area input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  background:#222;
+  color:#fff;
+}
+.btn-send{
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  background:var(--mine);
+  color:#04221b;
+  font-weight:700;
+  cursor:pointer
+}
+#userMenu{display:none;position:absolute;background:#111;padding:10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:100}
+#userMenu div{padding:6px 12px;cursor:pointer}
+#userMenu div:hover{background:#222}
+/* ألوان الرتب */
+.rank-مدير { color: gold; font-weight: bold; }
+.rank-سوبر { color: orange; font-weight: bold; }
+.rank-أدمن { color: greenyellow; font-weight: bold; }
+.rank-مشرف { color: deepskyblue; font-weight: bold; }
+.rank-بروميم { color: cyan; font-weight: bold; }
+.rank-عضو  { color: gray; font-weight: bold; }
+</style>
 </head>
 <body>
 
-  <div class="chat-wrap">
-    <!-- الهيدر -->
-    <div class="header">
-      <h1>غرفة الدردشة</h1>
-      <button onclick="leaveChat()">خروج</button>
-    </div>
+<div class="chat-wrap">
+<div class="header">
+<h1>غرفة الدردشة</h1>
+<button onclick="leaveChat()">خروج</button>
+</div>
 
-    <!-- الرسائل -->
-    <div class="messages" id="messages"></div>
+<div class="messages" id="messages"></div>
 
-    <!-- الإدخال -->
-    <div class="input-area">
-      <input id="msgInput" type="text" placeholder="اكتب رسالتك..." autocomplete="off" />
-      <button class="btn-send" id="sendBtn">إرسال</button>
-    </div>
-  </div>
+<div class="input-area">
+<input id="msgInput" type="text" placeholder="اكتب رسالتك..." autocomplete="off" />
+<button class="btn-send" id="sendBtn">إرسال</button>
+</div>
+</div>
 
-  <!-- قائمة الرتب -->
-  <div id="userMenu">
-    <div onclick="setRank('👑 مدير الموقع')">👑 مدير الموقع</div>
-    <div onclick="setRank('🛡️ مشرف')">🛡️ مشرف</div>
-    <div onclick="setRank('👤 عضو')">👤 عضو</div>
-  </div>
+<div id="userMenu">
+<div onclick="setRank('👑 مدير الموقع')">👑 مدير الموقع</div>
+<div onclick="setRank('⭐ سوبر أدمن')">⭐ سوبر أدمن</div>
+<div onclick="setRank('🏅 أدمن')">🏅 أدمن</div>
+<div onclick="setRank('🛡️ مشرف')">🛡️ مشرف</div>
+<div onclick="setRank('💎 بروميم')">💎 بروميم</div>
+<div onclick="setRank('👤 عضو')">👤 عضو</div>
+</div>
 
 <script>
-  const username = localStorage.getItem("username") || "مستخدم";
-  const avatar = localStorage.getItem("avatar") || "https://i.pravatar.cc/60";
+const username = localStorage.getItem("username") || "MOHAMED";
+const avatar = localStorage.getItem("avatar") || "https://i.pravatar.cc/60";
 
-  const messagesDiv = document.getElementById("messages");
-  const input = document.getElementById("msgInput");
-  const sendBtn = document.getElementById("sendBtn");
+const messagesDiv = document.getElementById("messages");
+const input = document.getElementById("msgInput");
+const sendBtn = document.getElementById("sendBtn");
 
-  // تخزين الرتب مؤقت
-  const userRanks = { "مستخدم": "👤 عضو" };
+const userRanks = { [username]: "👑 مدير الموقع" };
+const adminUser = "MOHAMED"; // فقط المدير يعطي الرتب
 
-  function getUserRank(user){
-    return userRanks[user] || "👤 عضو";
+function getUserRank(user){
+  return userRanks[user] || "👤 عضو";
+}
+
+function getRankClass(rank){
+  if(rank.includes("مدير")) return "rank-مدير";
+  if(rank.includes("سوبر")) return "rank-سوبر";
+  if(rank.includes("أدمن")) return "rank-أدمن";
+  if(rank.includes("مشرف")) return "rank-مشرف";
+  if(rank.includes("بروميم")) return "rank-بروميم";
+  return "rank-عضو";
+}
+
+function addMessageToDOM(user, avatarUrl, text, isMine=false, timeStr=null){
+  const row = document.createElement("div");
+  row.className = "msg-row " + (isMine ? "msg-mine" : "msg-other");
+
+  const rank = getUserRank(user);
+  const rankClass = getRankClass(rank);
+
+  row.innerHTML = `
+    <img class="avatar" src="${escapeHtml(avatarUrl)}" alt="avatar" onclick="showUserMenu('${user}', event)">
+    <div class="bubble">
+      <div class="who">${escapeHtml(user)} <span class="${rankClass}">${rank}</span></div>
+      <div class="text">${escapeHtml(text)}</div>
+      <div class="meta">${timeStr || (new Date()).toLocaleTimeString()}</div>
+    </div>
+  `;
+  messagesDiv.appendChild(row);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function sendMessage(){
+  const txt = input.value.trim();
+  if(!txt) return;
+  addMessageToDOM(username, avatar, txt, true, new Date().toLocaleTimeString());
+  input.value = "";
+}
+
+sendBtn.addEventListener("click", sendMessage);
+input.addEventListener("keydown",(e)=>{ if(e.key==="Enter"){sendMessage()} });
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, (m)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+}
+
+let selectedUser = null;
+function showUserMenu(user, e){
+  if(username !== adminUser) return; // فقط المدير يظهر المنيو
+  selectedUser = user;
+  const menu = document.getElementById("userMenu");
+  menu.style.display = "block";
+  menu.style.top = e.clientY + "px";
+  menu.style.left = e.clientX + "px";
+}
+
+function setRank(rank){
+  if(username !== adminUser) return; // فقط المدير يعطي الرتب
+  if(selectedUser){
+    const oldRank = getUserRank(selectedUser);
+    userRanks[selectedUser] = rank;
+
+    // رسالة النظام لإظهار تغيير الرتبة
+    addMessageToDOM(
+      "النظام",
+      "https://i.pravatar.cc/60",
+      `🎉 مبروك لقد أخذ ${selectedUser} رتبة ${rank} (كانت ${oldRank})`,
+      false
+    );
   }
+  document.getElementById("userMenu").style.display = "none";
+}
 
-  function addMessageToDOM(user, avatarUrl, text, isMine=false, timeStr=null){
-    const row = document.createElement("div");
-    row.className = "msg-row " + (isMine ? "msg-mine" : "msg-other");
-
-    const rank = getUserRank(user);
-
-    row.innerHTML = `
-      <img class="avatar" src="${escapeHtml(avatarUrl)}" alt="avatar" onclick="showUserMenu('${user}', event)">
-      <div class="bubble">
-        <div class="who">${escapeHtml(user)} <span style="color:#0fbf9a;font-size:12px">${rank}</span></div>
-        <div class="text">${escapeHtml(text)}</div>
-        <div class="meta">${timeStr || (new Date()).toLocaleTimeString()}</div>
-      </div>
-    `;
-    messagesDiv.appendChild(row);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+document.addEventListener("click",(e)=>{
+  if(!e.target.closest("#userMenu") && !e.target.classList.contains("avatar")){
+    document.getElementById("userMenu").style.display="none";
   }
+});
 
-  function sendMessage(){
-    const txt = input.value.trim();
-    if(!txt) return;
-    addMessageToDOM(username, avatar, txt, true, new Date().toLocaleTimeString());
-    input.value = "";
-  }
+function leaveChat(){
+  alert("تم تسجيل خروجك من الشات!");
+  window.location.href = "index.html";
+}
 
-  sendBtn.addEventListener("click", sendMessage);
-  input.addEventListener("keydown", (e)=>{ if(e.key==="Enter"){sendMessage()} });
-
-  function escapeHtml(str){
-    return String(str).replace(/[&<>"']/g, (m)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
-  }
-
-  // منيو تعيين الرتبة
-  let selectedUser = null;
-  function showUserMenu(user, e){
-    selectedUser = user;
-    const menu = document.getElementById("userMenu");
-    menu.style.display = "block";
-    menu.style.top = e.clientY + "px";
-    menu.style.left = e.clientX + "px";
-  }
-  function setRank(rank){
-    if(selectedUser){
-      userRanks[selectedUser] = rank;
-      alert("تم إعطاء " + selectedUser + " رتبة: " + rank);
-    }
-    document.getElementById("userMenu").style.display = "none";
-  }
-  document.addEventListener("click",(e)=>{
-    if(!e.target.closest("#userMenu") && !e.target.classList.contains("avatar")){
-      document.getElementById("userMenu").style.display="none";
-    }
-  });
-
-  // زر خروج
-  function leaveChat(){
-    alert("تم تسجيل خروجك من الشات!");
-    window.location.href = "index.html"; // غيرها لصفحة البداية تاعك
-  }
-
-  // مثال رسالة ترحيب
-  addMessageToDOM("النظام", avatar, username + " دخل الشات", false);
+// رسالة ترحيب
+addMessageToDOM("النظام", avatar, username + " دخل الشات", false);
 </script>
 </body>
 </html>

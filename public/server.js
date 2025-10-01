@@ -165,3 +165,18 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`🚀 السيرفر شغال على http://localhost:${PORT}`));
+// ✨ دالة تعرض إشعار عصري في الشات
+function addSystemMsg(text){
+  const div = document.createElement("div");
+  div.className = "system-msg";
+  div.innerHTML = `✨ ${text} ✨`;
+  messagesDiv.appendChild(div);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+function setRank(rank){
+  if(selectedUser){
+    userRanks[selectedUser] = rank;
+    addSystemMsg(`مبروك! ${selectedUser} أخذ رتبة ${rank}`);
+  }
+  document.getElementById("userMenu").style.display = "none";
+}
