@@ -1,5 +1,5 @@
 body {
-  background: url("images/chat-bg.png") no-repeat center center fixed;
+  background: url(imagesbg.jpg) no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -18,17 +18,4 @@ body {
   width: 0;
   background: linear-gradient(90deg, #4caf50, #81c784);
   transition: width 0.3s ease;
-}
-.system-msg{
-  text-align:center;
-  font-weight:bold;
-  margin:8px 0;
-  background: linear-gradient(90deg,#ff6b6b,#ffa502,#1e90ff,#2ed573);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fadeIn 1s ease-in-out;
-}
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(10px); }
-  to   { opacity:1; transform:translateY(0); }
 }
