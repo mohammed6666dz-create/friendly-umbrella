@@ -1,21 +1,7 @@
 {
-  "name": "chat-app",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
-    "express": "^4.21.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.2",
     "socket.io": "^4.8.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mohammed6666dz-create/chat-app.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mohammed6666dz-create/chat-app/issues"
-  },
-  "homepage": "https://github.com/mohammed6666dz-create/chat-app#readme",
-  "license": "ISC"
+  }
 }

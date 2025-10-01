@@ -13,134 +13,82 @@
       --other:#2a2f36; /* لون رسائل الاخرين */
       --text:#eaf6f3;
     }
-
-    *{box-sizing:border-box}
     body{
       margin:0;
       height:100vh;
-      background:linear-gradient(180deg,#071016 0%, #0b1316 100%);
+      background:#0b1316;
       color:var(--text);
-      font-family: "Cairo", "Segoe UI", Roboto, Arial, sans-serif;
+      font-family:"Cairo",sans-serif;
       display:flex;
       flex-direction:column;
       direction:rtl;
     }
 
-    /* Top bar */
-    header.topbar{
-      height:64px;
+    /* هيدر */
+    .header{
+      background:#111418;
+      padding:14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding:0 18px;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-bottom:1px solid rgba(255,255,255,0.03);
+      border-bottom:1px solid #222;
     }
-    .logo{font-weight:700;color:var(--mine);display:flex;align-items:center;gap:8px}
-    .room-info{font-size:15px;opacity:.9}
-    .profile-area{display:flex;align-items:center;gap:10px}
-    .profile-area img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.06)}
+    .header h1{
+      margin:0;
+      font-size:18px;
+      color:var(--mine);
+    }
+    .header button{
+      background:#ff4d4d;
+      border:none;
+      padding:6px 12px;
+      border-radius:8px;
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+    }
 
-    /* full-screen chat area */
+    /* الشات كامل */
     .chat-wrap{
-      flex:1;
       display:flex;
       flex-direction:column;
-      height:calc(100vh - 64px);
+      height:100vh;
     }
 
-    /* messages scroller */
     .messages{
       flex:1;
-      overflow:auto;
+      overflow-y:auto;
       padding:22px;
       display:flex;
       flex-direction:column;
       gap:12px;
-      scroll-behavior:smooth;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));
     }
 
-    /* message row */
-    .msg-row{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      width:100%;
-    }
+    .msg-row{display:flex;gap:12px;align-items:flex-start;width:100%}
+    .msg-other{justify-content:flex-start;direction:ltr}
+    .msg-mine{justify-content:flex-end;direction:ltr}
+    .avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;cursor:pointer}
+    .bubble{max-width:78%;padding:10px 14px;border-radius:14px;color:var(--text);box-shadow:0 6px 18px rgba(0,0,0,0.4);display:flex;flex-direction:column;gap:4px}
+    .msg-mine .bubble{background:var(--mine);border-bottom-right-radius:4px;text-align:right}
+    .msg-other .bubble{background:var(--other);border-bottom-left-radius:4px;text-align:right}
+    .bubble .who{font-weight:700;font-size:14px}
+    .bubble .text{font-size:16px}
+    .bubble .meta{font-size:12px;opacity:.6}
 
-    /* other user (left aligned visually) */
-    .msg-other{
-      justify-content:flex-start;
-      direction:ltr; /* for avatar on left when shown visually */
-    }
-    .msg-mine{
-      justify-content:flex-end;
-      direction:ltr;
-    }
-
-    /* avatar */
-    .avatar{
-      width:56px;height:56px;border-radius:50%;
-      flex:0 0 56px;
-      object-fit:cover;
-      border:2px solid rgba(255,255,255,0.06);
-      background:#222;
-    }
-
-    /* bubble */
-    .bubble{
-      max-width:78%;
-      padding:14px 16px;
-      border-radius:14px;
-      color:var(--text);
-      word-break:break-word;
-      box-shadow: 0 6px 18px rgba(2,8,12,0.45);
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    .bubble .who{font-weight:700;font-size:15px;color:rgba(255,255,255,0.95)}
-    .bubble .text{font-size:18px;line-height:1.35;color:rgba(255,255,255,0.95)}
-    .bubble .meta{font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px}
-
-    /* colors: mine vs other */
-    .msg-mine .bubble{
-      background:linear-gradient(90deg, rgba(15,191,154,1), rgba(8,150,123,1));
-      border-bottom-right-radius:4px;
-      align-items:flex-end;
-      text-align:right;
-    }
-    .msg-other .bubble{
-      background:var(--other);
-      border-bottom-left-radius:4px;
-      text-align:right;
-    }
-
-    /* input area */
     .input-area{
       padding:12px;
       display:flex;
       gap:10px;
-      align-items:center;
-      background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));
-      border-top:1px solid rgba(255,255,255,0.03);
+      background:#111;
     }
-
-    .input-area input[type="text"]{
+    .input-area input{
       flex:1;
-      padding:12px 14px;
-      border-radius:12px;
+      padding:10px;
+      border-radius:10px;
       border:none;
-      font-size:16px;
-      background:#0f1416;
-      color:var(--text);
-      outline:none;
+      background:#222;
+      color:#fff;
     }
-
     .btn-send{
       padding:10px 16px;
       border-radius:10px;
@@ -148,132 +96,117 @@
       background:var(--mine);
       color:#04221b;
       font-weight:700;
-      cursor:pointer;
+      cursor:pointer
     }
 
-    /* responsive */
-    @media (max-width:700px){
-      .avatar{width:44px;height:44px;flex:0 0 44px}
-      .bubble{font-size:16px}
-    }
+    #userMenu{display:none;position:absolute;background:#111;padding:10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:100}
+    #userMenu div{padding:6px 12px;cursor:pointer}
+    #userMenu div:hover{background:#222}
   </style>
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="logo">💬 ARABI chat</div>
-    <div class="room-info" id="roomInfo">—</div>
-    <div class="profile-area">
-      <div id="usernameDisplay" style="text-align:right"></div>
-      <img id="userAvatar" src="https://i.pravatar.cc/60" alt="avatar">
-    </div>
-  </header>
-
   <div class="chat-wrap">
+    <!-- الهيدر -->
+    <div class="header">
+      <h1>غرفة الدردشة</h1>
+      <button onclick="leaveChat()">خروج</button>
+    </div>
+
+    <!-- الرسائل -->
     <div class="messages" id="messages"></div>
 
+    <!-- الإدخال -->
     <div class="input-area">
-      <input id="msgInput" type="text" placeholder="اكتب رسالتك ثم اضغط إرسال أو Enter..." autocomplete="off" />
+      <input id="msgInput" type="text" placeholder="اكتب رسالتك..." autocomplete="off" />
       <button class="btn-send" id="sendBtn">إرسال</button>
     </div>
   </div>
 
-  <!-- لو عندك سيرفر socket.io حط <script src="/socket.io/socket.io.js"></script> -->
-  <script>
-    // إعدادات: يقرأ الاسم/الصورة/الروم من localStorage (rooms.html لازم يخزنها)
-    const username = localStorage.getItem("username") || "مستخدم";
-    const avatar = localStorage.getItem("avatar") || "https://i.pravatar.cc/60";
-    const room = localStorage.getItem("room") || "غرفة عامة";
+  <!-- قائمة الرتب -->
+  <div id="userMenu">
+    <div onclick="setRank('👑 مدير الموقع')">👑 مدير الموقع</div>
+    <div onclick="setRank('🛡️ مشرف')">🛡️ مشرف</div>
+    <div onclick="setRank('👤 عضو')">👤 عضو</div>
+  </div>
 
-    // عرض في الـ topbar
-    document.getElementById("roomInfo").innerText = "📢 " + room;
-    document.getElementById("usernameDisplay").innerHTML = `<div style="font-weight:700">${username}</div>`;
+<script>
+  const username = localStorage.getItem("username") || "مستخدم";
+  const avatar = localStorage.getItem("avatar") || "https://i.pravatar.cc/60";
 
-    const messagesDiv = document.getElementById("messages");
-    const input = document.getElementById("msgInput");
-    const sendBtn = document.getElementById("sendBtn");
+  const messagesDiv = document.getElementById("messages");
+  const input = document.getElementById("msgInput");
+  const sendBtn = document.getElementById("sendBtn");
 
-    // نجرب نربط Socket.IO لو متوفر (لو ما كانش نشتغل locally)
-    let socket = null;
-    if (typeof io === "function") {
-      try {
-        socket = io();
-      } catch (e) {
-        socket = null;
-      }
+  // تخزين الرتب مؤقت
+  const userRanks = { "مستخدم": "👤 عضو" };
+
+  function getUserRank(user){
+    return userRanks[user] || "👤 عضو";
+  }
+
+  function addMessageToDOM(user, avatarUrl, text, isMine=false, timeStr=null){
+    const row = document.createElement("div");
+    row.className = "msg-row " + (isMine ? "msg-mine" : "msg-other");
+
+    const rank = getUserRank(user);
+
+    row.innerHTML = `
+      <img class="avatar" src="${escapeHtml(avatarUrl)}" alt="avatar" onclick="showUserMenu('${user}', event)">
+      <div class="bubble">
+        <div class="who">${escapeHtml(user)} <span style="color:#0fbf9a;font-size:12px">${rank}</span></div>
+        <div class="text">${escapeHtml(text)}</div>
+        <div class="meta">${timeStr || (new Date()).toLocaleTimeString()}</div>
+      </div>
+    `;
+    messagesDiv.appendChild(row);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  function sendMessage(){
+    const txt = input.value.trim();
+    if(!txt) return;
+    addMessageToDOM(username, avatar, txt, true, new Date().toLocaleTimeString());
+    input.value = "";
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  input.addEventListener("keydown", (e)=>{ if(e.key==="Enter"){sendMessage()} });
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, (m)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+  }
+
+  // منيو تعيين الرتبة
+  let selectedUser = null;
+  function showUserMenu(user, e){
+    selectedUser = user;
+    const menu = document.getElementById("userMenu");
+    menu.style.display = "block";
+    menu.style.top = e.clientY + "px";
+    menu.style.left = e.clientX + "px";
+  }
+  function setRank(rank){
+    if(selectedUser){
+      userRanks[selectedUser] = rank;
+      alert("تم إعطاء " + selectedUser + " رتبة: " + rank);
     }
-
-    // إذا متصل بالـ socket نرسل و نستقبل عن طريق السيرفر
-    if (socket) {
-      // نطلب الانضمام للروم
-      socket.emit("joinRoom", { room, username, avatar });
-
-      // استقبال رسالة من السيرفر
-      socket.on("message", (data) => {
-        // data expected: { user, avatar, text, room, time }
-        addMessageToDOM(data.user, data.avatar, data.text, data.user === username, data.time);
-      });
+    document.getElementById("userMenu").style.display = "none";
+  }
+  document.addEventListener("click",(e)=>{
+    if(!e.target.closest("#userMenu") && !e.target.classList.contains("avatar")){
+      document.getElementById("userMenu").style.display="none";
     }
+  });
 
-    // دالة تضيف رسالة للـ DOM
-    function addMessageToDOM(user, avatarUrl, text, isMine=false, timeStr=null){
-      const row = document.createElement("div");
-      row.className = "msg-row " + (isMine ? "msg-mine" : "msg-other");
+  // زر خروج
+  function leaveChat(){
+    alert("تم تسجيل خروجك من الشات!");
+    window.location.href = "index.html"; // غيرها لصفحة البداية تاعك
+  }
 
-      // DOM structure: avatar + bubble
-      row.innerHTML = `
-        <img class="avatar" src="${escapeHtml(avatarUrl || 'https://i.pravatar.cc/60')}" alt="avatar">
-        <div class="bubble">
-          <div class="who">${escapeHtml(user)}</div>
-          <div class="text">${escapeHtml(text)}</div>
-          <div class="meta">${timeStr || (new Date()).toLocaleTimeString()}</div>
-        </div>
-      `;
-
-      messagesDiv.appendChild(row);
-      // auto-scroll to bottom
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    }
-
-    // إرسال رسالة: إما عبر socket أو لوكلي
-    function sendMessage(){
-      const txt = input.value.trim();
-      if(!txt) return;
-      const timestamp = new Date().toLocaleTimeString();
-
-      if(socket){
-        // نبعث للسيرفر (السيرفر يبث فقط للي في نفس الروم)
-        socket.emit("chatMessage", { room, user: username, avatar, msg: txt, time: timestamp });
-      } else {
-        // وضع Offline: نعرضها محليا على طول
-        addMessageToDOM(username, avatar, txt, true, timestamp);
-      }
-
-      input.value = "";
-      input.focus();
-    }
-
-    // زر + مفتاح Enter
-    sendBtn.addEventListener("click", sendMessage);
-    input.addEventListener("keydown", (e)=>{
-      if(e.key === "Enter") { e.preventDefault(); sendMessage(); }
-    });
-
-    // helper لتفادي XSS بسيط (escape)
-    function escapeHtml(unsafe){
-      return String(unsafe)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    // مثال: لو تحب تعرض رسالة دخول النظام
-    (function showWelcome(){
-      const t = new Date().toLocaleTimeString();
-      addMessageToDOM("النظام", "", `${username} انضم إلى ${room}`, false, t);
-    })();
-  </script>
+  // مثال رسالة ترحيب
+  addMessageToDOM("النظام", avatar, username + " دخل الشات", false);
+</script>
 </body>
 </html>
